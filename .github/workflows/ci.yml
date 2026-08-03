@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 单元测试
+        run: |
+          PYTHONPATH=podcast-distill-skill/scripts python -m unittest discover -s tests -v
+      - name: 最小可运行检查
+        run: python check.py
+      - name: 端到端冒烟
+        run: |
+          python podcast-distill-skill/scripts/podcast-cli.py init --project .
+          python podcast-distill-skill/scripts/podcast-cli.py ingest --project . --slug ep12 --source examples/sample-transcript.txt
+          python podcast-distill-skill/scripts/podcast-cli.py extract --project . --slug ep12
+          python podcast-distill-skill/scripts/podcast-cli.py verify --project . --slug ep12
+          python podcast-distill-skill/scripts/podcast-cli.py check --project . --slug ep12
+          python podcast-distill-skill/scripts/podcast-cli.py test --project . --slug ep12 --mode mock
+          python podcast-distill-skill/scripts/podcast-cli.py package --project . --slug ep12 --name demo-pack
+          python podcast-distill-skill/scripts/podcast-cli.py gate --pack packs/demo-pack

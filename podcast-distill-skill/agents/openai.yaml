@@ -1,0 +1,4 @@
+interface:
+  display_name: "播客蒸馏"
+  short_description: "把播客转写蒸馏成可验证、可测试、可进化的知识 skill 包"
+  default_prompt: "使用播客蒸馏 skill，把这份播客转写变成 skill 包"

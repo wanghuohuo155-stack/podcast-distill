@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+episodes/
+packs/
+proposals/
+*.log
+.coverage
+htmlcov/

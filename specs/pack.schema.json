@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "podcast-distill pack schema",
+  "type": "object",
+  "required": ["name", "version", "hosts", "skills"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "hosts": { "type": "array", "items": { "enum": ["codex", "claude", "cursor"] } },
+    "skills": { "type": "array", "items": { "type": "string" } },
+    "created_at": { "type": "string" }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "podcast-distill trigger test schema",
+  "type": "object",
+  "required": ["skill", "version", "test_cases"],
+  "properties": {
+    "skill": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "test_cases": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "prompt", "expected_behavior"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "type": { "enum": ["should_trigger", "should_not_trigger", "edge_case"] },
+          "prompt": { "type": "string", "minLength": 1 },
+          "expected_behavior": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

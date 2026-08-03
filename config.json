@@ -1,0 +1,10 @@
+{
+  "project_dir": ".",
+  "provider": "mock",
+  "quote_max_chars": 150,
+  "min_pass_rate": 0.8,
+  "bait_tolerance": 0,
+  "api_key_env": "OPENAI_API_KEY",
+  "base_url": "",
+  "model": ""
+}
